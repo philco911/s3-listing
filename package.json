@@ -1,0 +1,25 @@
+{
+  "name": "s3-listing",
+  "description": "Generate a listing of an AWS S3 bucket",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "https://github.com/philco911/s3-listing",
+  "author": "Phil Emmett <philco911@fastmail.com>",
+  "scripts": {
+    "package": "ncc build index.js -o dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "aws-sdk": "^2.1101.0",
+    "filesize": "^8.0.7",
+    "minimatch": "^5.0.1"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.21.1",
+    "prettier": "^1.19.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  }
+}

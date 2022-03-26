@@ -1,0 +1,31 @@
+name: S3 Listing
+description: 'Generate a listing of an S3 bucket'
+author: 'Phil Emmett'
+inputs:
+  aws_access_key_id:
+    description: 'AWS access key id'
+    required: true
+  aws_secret_access_key:
+    description: 'AWS secret access key'
+    required: true
+  bucket:
+    description: 'AWS bucket name'
+    required: true
+  prefix:
+    required: false
+    default: ""
+    description: 'prefix directory to list from'
+  exclude:
+    required: false
+    default: ""
+    description: 'paths to exclude'
+  dl_helper:
+    required: false
+    default: ""
+    description: 'URL to an S3 download webpage'
+  output_file:
+    required: true
+    description: 'output file to create'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
