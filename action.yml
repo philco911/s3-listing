@@ -21,7 +21,7 @@ inputs:
     description: 'paths to exclude'
   dl_helper:
     required: false
-    default: ""
+    default: "https://philco911.github.io/s3-listing/s3dl.html"
     description: 'URL to an S3 download webpage'
   output_file:
     required: true
