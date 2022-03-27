@@ -105,6 +105,7 @@
         var stor = window.localStorage;
         stor.removeItem("accesskey_" + s3bucket);
         stor.removeItem("secretkey_" + s3bucket);
+        stor.removeItem("region_" + s3bucket);
         GetKeys();
       };
 
