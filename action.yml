@@ -11,6 +11,10 @@ inputs:
   bucket:
     description: 'AWS bucket name'
     required: true
+  region:
+    required: false
+    default: "us-east-1"
+    description: 'AWS region'
   prefix:
     required: false
     default: ""

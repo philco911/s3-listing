@@ -17,13 +17,17 @@
           </div>
           <div id="needkeys" class="collapse">
             <form>
-              <p>Enter AWS keys for S3 bucket <span class="badge bg-secondary" id="bucketname"></span></p>
+              <p>Enter configuration for AWS S3 bucket <span class="badge bg-secondary" id="bucketname"></span></p>
               <div class="mb-2">
-                <label for="accesskey" class="form-label">AWS Access Key ID</label>
+                <label for="region" class="form-label">Region</label>
+                <input type="text" class="form-control" id="region" autocomplete="off">
+              </div>
+              <div class="mb-2">
+                <label for="accesskey" class="form-label">Access Key ID</label>
                 <input type="text" class="form-control" id="accesskey" autocomplete="off">
               </div>
               <div class="mb-2">
-                <label for="secretkey" class="form-label">AWS Secret Access Key</label>
+                <label for="secretkey" class="form-label">Secret Access Key</label>
                 <input type="text" class="form-control" id="secretkey" autocomplete="off">
                 <div class="form-text">Keys are stored locally and not sent to the server.</div>
               </div>
@@ -48,6 +52,7 @@
       var s3key;
       var s3accesskey;
       var s3secretkey;
+      var s3region;
 
       var showdl;
       var needkeys;
@@ -56,7 +61,7 @@
       var GenerateAndShow = function() {
         needkeys.hide();
         showdl.show();
-        AWS.config.region = 'us-east-1';
+        AWS.config.region = s3region;
         AWS.config.credentials = new AWS.Credentials(s3accesskey, s3secretkey);
         var s3 = new AWS.S3({apiVersion: '2006-03-01'});
         var params = {Bucket: s3bucket, Key: s3key, Expires: 3600};
@@ -73,8 +78,10 @@
         var stor = window.localStorage;
         s3accesskey = document.getElementById('accesskey').value;
         s3secretkey = document.getElementById('secretkey').value;
+        s3region = document.getElementById('region').value;
         stor.setItem("accesskey_" + s3bucket, s3accesskey);
         stor.setItem("secretkey_" + s3bucket, s3secretkey);
+        stor.setItem("region_" + s3bucket, s3region);
         GenerateAndShow();
       };
 
@@ -82,9 +89,11 @@
         var stor = window.localStorage;
         s3accesskey = stor.getItem("accesskey_" + s3bucket);
         s3secretkey = stor.getItem("secretkey_" + s3bucket);
-        if (!s3accesskey || !s3secretkey) {
+        s3region = stor.getItem("region_" + s3bucket);
+        if (!s3accesskey || !s3secretkey || !s3region) {
           document.getElementById('accesskey').value = "";
           document.getElementById('secretkey').value = "";
+          document.getElementById('region').value = "us-east-1";
           showdl.hide();
           needkeys.show();
         } else {

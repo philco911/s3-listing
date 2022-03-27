@@ -17,6 +17,9 @@ const BUCKET = core.getInput('bucket', {
 const PREFIX = core.getInput('prefix', {
   required: false
 });
+const REGION = core.getInput('region', {
+  required: false
+});
 const EXCLUDE = core.getInput('exclude', {
   required: false
 });
@@ -30,10 +33,16 @@ const DL_HELPER = core.getInput('dl_helper', {
   required: false
 });
 
-const s3client = new s3({
+var clientparams = {
   accessKeyId: AWS_ACCESS_KEY_ID,
   secretAccessKey: AWS_SECRET_ACCESS_KEY
-});
+};
+
+if (REGION) {
+  clientparams['region'] = REGION;
+}
+
+var s3client = new s3(clientparams);
 
 var params = {
   Bucket: BUCKET
@@ -143,6 +152,7 @@ function process_listing(listing) {
   fh.write("# Listing\n");
   fh.write("- Bucket: " + BUCKET + "\n");
   fh.write("- Path Prefix: " + PREFIX + "\n");
+  fh.write("- Region: " + REGION + "\n");
   fh.write("- Artifact Count: " + count_artifacts(listing) + "\n");
   fh.write("\n");
 
