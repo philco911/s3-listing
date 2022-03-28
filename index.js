@@ -149,12 +149,12 @@ function process_listing(listing) {
     flags: 'w'
   });
 
-  fh.write("# Listing\n");
-  fh.write("- Bucket: " + BUCKET + "\n");
-  fh.write("- Path Prefix: " + PREFIX + "\n");
-  fh.write("- Region: " + REGION + "\n");
-  fh.write("- Artifact Count: " + count_artifacts(listing) + "\n");
-  fh.write("\n");
+  fh.write("\n---\n\n");
+  fh.write("**Bucket:** " + BUCKET + "\n\n");
+  fh.write("**Path Prefix:** " + PREFIX + "\n\n");
+  fh.write("**Region:** " + REGION + "\n\n");
+  fh.write("**Artifact Count:** " + count_artifacts(listing) + "\n\n");
+  fh.write("---\n\n");
 
   write_level(fh, listing, 0);
 
