@@ -27,6 +27,10 @@ inputs:
     required: false
     default: "https://philco911.github.io/s3-listing/s3dl.html"
     description: 'URL to an S3 download webpage'
+  header_depth:
+    required: false
+    default: "0"
+    description: "Number of layers to make as section headers"
   output_file:
     required: true
     description: 'output file to create'
